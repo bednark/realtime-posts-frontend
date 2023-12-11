@@ -18,7 +18,7 @@ html, body {
 
 .container .post-field {
   width: 600px;
-  height: 320px;
+  height: 380px;
   margin-top: 20px;
   padding: 10px;
   display: flex;
@@ -78,6 +78,17 @@ html, body {
   font-size: 1.2em;
   height: 180px;
   resize: none;
+  padding: 5px;
+}
+
+.container .post-field input {
+  background: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1.2em;
+  height: 40px;
+  padding: 5px;
 }
 
 .container .post {

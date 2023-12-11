@@ -2,7 +2,8 @@
   <div class="container">
     <div class="post-field">
       <h2>Add post</h2>
-      <textarea v-model="new_post" />
+      <input type="text" v-model="nickname" placeholder="Nickname">
+      <textarea v-model="new_post" placeholder="What are you thinking about?" />
       <button @click="public_post">Public</button>
     </div>
     <div class="post" v-for="post in posts">
@@ -16,21 +17,10 @@
 export default {
   data() {
     return {
-      posts: [
-        {
-          user: 'Guest 1',
-          content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga neque eligendi
-          a omnis dolorem similique illo architecto beatae quidem, repellendus officia
-          eos animi blanditiis dolore optio commodi itaque, quaerat nam?`
-        },
-        {
-          user: 'Guest 2',
-          content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga neque eligendi
-          a omnis dolorem similique illo architecto beatae quidem, repellendus officia
-          eos animi blanditiis dolore optio commodi itaque, quaerat nam?`
-        }
-      ],
-      new_post: ''
+      posts: [],
+      nickname: '',
+      new_post: '',
+      websocket: new WebSocket('ws://localhost:8001/')
     }
   },
   methods: {
@@ -40,13 +30,24 @@ export default {
         return
       }
 
-      this.posts.unshift({
-        user: 'Another Guest',
+      let new_post_content = {
+        user: this.nickname,
         content: this.new_post
-      })
+      }
 
+      this.websocket.send(JSON.stringify(new_post_content))
+      this.nickname = ''
       this.new_post = ''
     }
+  },
+  created() {
+    this.websocket.addEventListener("message", (event) => {
+      let result = JSON.parse(event.data)
+      this.posts.unshift({
+        user: result.user,
+        content: result.content
+      })
+    })
   }
 }
 </script>
