@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: rgb(46, 42, 42);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container .post-field {
+  width: 600px;
+  height: 320px;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.container .post-field h2 {
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.container .post-field button {
+  text-transform: uppercase;
+  height: 35px;
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  transition-duration: 0.4s;
+  overflow: hidden;
+}
+
+.container .post-field button:after {
+  content: "";
+  background: rgb(46, 42, 42);
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all .3s
+}
+
+.container .post-field button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.container .post-field button:hover {
+  background: white;
+  color: black;
+}
+
+.container .post-field textarea {
+  background: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1.2em;
+  height: 180px;
+  resize: none;
+}
+
+.container .post {
+  width: 580px;
+  padding: 20px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
